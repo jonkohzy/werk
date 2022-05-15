@@ -25,24 +25,25 @@
 	       }
 
 	       :not(:root):fullscreen::backdrop {
-		    position: fixed;
-		    top: 0px;
-		    right: 0px;
-		    bottom: 0px;
-		    left: 0px;
-		    background: #282828;
-		}
+			    position: fixed;
+			    top: 0px;
+			    right: 0px;
+			    bottom: 0px;
+			    left: 0px;
+			    background: #282828;
+			}
 	</style>
 	<link href="https://fonts.googleapis.com" rel="preconnect">
 	<link href="https://fonts.gstatic.com" rel="preconnect">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
-<body onclick="openFullscreen();">
+<body onclick="toggleFullscreen();">
 	<i>do the hard work, <b>especially</b><br>
 	when you don't feel like it.</i>
 	
 	<script>
 	var elem = document.body;
+	var count = 0;
 	function openFullscreen() {
 		if (elem.requestFullscreen) {
 			elem.requestFullscreen();
@@ -52,6 +53,24 @@
 			elem.msRequestFullscreen();
 		}
 	}  
+	function closeFullscreen() {
+		if (elem.requestFullscreen) {
+			document.exitFullscreen();
+		} else if (elem.webkitRequestFullscreen) { /* Safari */
+			document.webkitExitFullscreen();
+		} else if (elem.msRequestFullscreen) { /* IE11 */
+			document.msExitFullscreen();
+		}
+	}  
+	function toggleFullscreen() {
+		count = count + 1
+		if (count%2 == 1) {
+			openFullscreen();
+		}
+		else {
+			closeFullscreen();
+		}
+	}
 	</script>
 </body>
 </html>
